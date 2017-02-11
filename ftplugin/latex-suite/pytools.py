@@ -1,9 +1,6 @@
 import glob
 import os
 import re
-import string
-
-
 import vim
 
 
@@ -13,7 +10,7 @@ def catFile(filename):
         fp = open(filename)
         lines = fp.read()
         fp.close()
-    except FileNotFoundError:
+    except IOError:
         lines = ''
 
     # escape double quotes and backslashes before quoting the string so
@@ -34,7 +31,7 @@ def isPresentInFile(regexp, filename):
         else:
             vim.command('let retval = 0')
             return None
-    except FileNotFoundError:
+    except IOError:
         vim.command('let retval = 0')
         return None
 
